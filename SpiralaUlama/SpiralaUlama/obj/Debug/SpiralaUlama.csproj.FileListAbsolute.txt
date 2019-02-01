@@ -1,0 +1,10 @@
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\bin\Debug\SpiralaUlama.exe.config
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\bin\Debug\SpiralaUlama.exe
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\bin\Debug\SpiralaUlama.pdb
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.csprojResolveAssemblyReference.cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.Form1.resources
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.Properties.Resources.resources
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.csproj.GenerateResource.Cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.csproj.CoreCompileInputs.cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.exe
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlama\obj\Debug\SpiralaUlama.pdb
