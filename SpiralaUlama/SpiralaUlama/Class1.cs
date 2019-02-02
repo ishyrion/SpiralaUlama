@@ -10,14 +10,29 @@ namespace SpiralaUlama
     {
         private List<int> primeNumbers;
         private static int MaximumSizeOfSieve=1000000;
-
+        static private PrimeNumbers singletonPrimeNumbers;
+        static public PrimeNumbers SingletonPrimeNumbers()
+        {
+            if (singletonPrimeNumbers is null)
+                singletonPrimeNumbers = new PrimeNumbers();
+            return singletonPrimeNumbers;
+        }
 
         public PrimeNumbers(int i = 2) {
             primeNumbers = new List<int>{ 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };
             if(i>=101)
                 FindPrimesToNumber(i);
+            singletonPrimeNumbers = this;
         }
 
+        //To Test Only
+        public void WritePrimes()
+        {
+            foreach (var c in primeNumbers)
+                Console.WriteLine(c + " ");
+            Console.WriteLine("Nacisnij <ENTER>");
+            Console.ReadLine();
+        }
 
 
 

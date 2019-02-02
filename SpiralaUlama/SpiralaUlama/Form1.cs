@@ -19,6 +19,19 @@ namespace SpiralaUlama
 
         private void button1_Click(object sender, EventArgs e)
         {
+            string s = textBoxWpiszZakresLP.Text;
+            int result;
+            Int32.TryParse(s, out result);
+            PrimeNumbers.SingletonPrimeNumbers().FindPrimesToNumber(result);
+        }
+
+        private void textBoxInfoAboutPrimeGen_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
     }

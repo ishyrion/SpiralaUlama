@@ -14,9 +14,14 @@ namespace SpiralaUlama
         [STAThread]
         static void Main()
         {
+            PrimeNumbers pn = new PrimeNumbers();
+            pn.WritePrimes();
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+
         }
     }
 }
