@@ -31,8 +31,9 @@
             this.Generuj = new System.Windows.Forms.Button();
             this.textBoxInfoAboutPrimeGen = new System.Windows.Forms.TextBox();
             this.textBoxWpiszZakresLP = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych = new System.Windows.Forms.TextBox();
+            this.WygenerujSpiraleUlama = new System.Windows.Forms.Button();
+            this.WypiszLiczbyPierwsze = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // Generuj
@@ -47,12 +48,12 @@
             // 
             // textBoxInfoAboutPrimeGen
             // 
-            this.textBoxInfoAboutPrimeGen.Location = new System.Drawing.Point(22, 60);
+            this.textBoxInfoAboutPrimeGen.Location = new System.Drawing.Point(22, 40);
             this.textBoxInfoAboutPrimeGen.Name = "textBoxInfoAboutPrimeGen";
             this.textBoxInfoAboutPrimeGen.ReadOnly = true;
             this.textBoxInfoAboutPrimeGen.Size = new System.Drawing.Size(351, 20);
             this.textBoxInfoAboutPrimeGen.TabIndex = 1;
-            this.textBoxInfoAboutPrimeGen.Text = "Wpisz Zakres (Generuj liczby pierwsze od 2,3,..,97,.. do:<PodanyZakres>)";
+            this.textBoxInfoAboutPrimeGen.Text = "Wpisz Zakres (Generuj liczby pierwsze (aktualnie) do: 97)";
             this.textBoxInfoAboutPrimeGen.TextChanged += new System.EventHandler(this.textBoxInfoAboutPrimeGen_TextChanged);
             // 
             // textBoxWpiszZakresLP
@@ -61,40 +62,55 @@
             this.textBoxWpiszZakresLP.Name = "textBoxWpiszZakresLP";
             this.textBoxWpiszZakresLP.Size = new System.Drawing.Size(100, 20);
             this.textBoxWpiszZakresLP.TabIndex = 2;
+            this.textBoxWpiszZakresLP.TextChanged += new System.EventHandler(this.textBoxWpiszZakresLP_TextChanged);
             // 
-            // button1
+            // textBoxOkienkoDoWypisaniaLiczbPierwszych
             // 
-            this.button1.Location = new System.Drawing.Point(22, 138);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(118, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "WypiszLiczbyPierwsze";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.Location = new System.Drawing.Point(20, 200);
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.Multiline = true;
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.Name = "textBoxOkienkoDoWypisaniaLiczbPierwszych";
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.Size = new System.Drawing.Size(760, 360);
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.TabIndex = 3;
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = false;
+            this.textBoxOkienkoDoWypisaniaLiczbPierwszych.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
-            // button2
+            // WygenerujSpiraleUlama
             // 
-            this.button2.Location = new System.Drawing.Point(164, 138);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(151, 23);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Wygeneruj Spirale Ulama";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
+            this.WygenerujSpiraleUlama.Location = new System.Drawing.Point(173, 138);
+            this.WygenerujSpiraleUlama.Name = "WygenerujSpiraleUlama";
+            this.WygenerujSpiraleUlama.Size = new System.Drawing.Size(141, 23);
+            this.WygenerujSpiraleUlama.TabIndex = 5;
+            this.WygenerujSpiraleUlama.Text = "Wygeneruj Spirale Ulama";
+            this.WygenerujSpiraleUlama.UseVisualStyleBackColor = true;
+            this.WygenerujSpiraleUlama.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // WypiszLiczbyPierwsze
+            // 
+            this.WypiszLiczbyPierwsze.Location = new System.Drawing.Point(22, 138);
+            this.WypiszLiczbyPierwsze.Name = "WypiszLiczbyPierwsze";
+            this.WypiszLiczbyPierwsze.Size = new System.Drawing.Size(136, 23);
+            this.WypiszLiczbyPierwsze.TabIndex = 6;
+            this.WypiszLiczbyPierwsze.Text = "Wypisz Liczby Pierwsze";
+            this.WypiszLiczbyPierwsze.UseVisualStyleBackColor = true;
+            this.WypiszLiczbyPierwsze.Click += new System.EventHandler(this.button3_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 517);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.WypiszLiczbyPierwsze);
+            this.Controls.Add(this.WygenerujSpiraleUlama);
+            this.Controls.Add(this.textBoxOkienkoDoWypisaniaLiczbPierwszych);
             this.Controls.Add(this.textBoxWpiszZakresLP);
             this.Controls.Add(this.textBoxInfoAboutPrimeGen);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.Generuj);
+            this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -105,8 +121,9 @@
         private System.Windows.Forms.Button Generuj;
         private System.Windows.Forms.TextBox textBoxInfoAboutPrimeGen;
         private System.Windows.Forms.TextBox textBoxWpiszZakresLP;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBoxOkienkoDoWypisaniaLiczbPierwszych;
+        private System.Windows.Forms.Button WygenerujSpiraleUlama;
+        private System.Windows.Forms.Button WypiszLiczbyPierwsze;
     }
 }
 
