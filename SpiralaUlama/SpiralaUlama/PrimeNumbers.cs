@@ -11,9 +11,9 @@ namespace SpiralaUlama
     {
         private List<int> primeNumbers = new List<int> { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };
         private int maximumValue = 97;
-        public int MaximumValue => maximumValue;
+        public int MaximumValue { get=> maximumValue; set=> maximumValue=value; }
         static private PrimeNumbers singletonPrimeNumbers;
-        static public PrimeNumbers SingletonPrimeNumbers()
+        static public PrimeNumbers GetSingleton()
         {
             if (singletonPrimeNumbers is null)
                 singletonPrimeNumbers = new PrimeNumbers();
@@ -26,13 +26,20 @@ namespace SpiralaUlama
             singletonPrimeNumbers = this;
         }
 
-        //To Test Only
-        public override string ToString()
+
+        private async Task<string> connectAllPrimes()
         {
             string primesToString = "";
-            foreach (var actualPrime in primeNumbers)
-                primesToString += actualPrime + " ";
+            for (var indexOfActualPrime = 0; indexOfActualPrime < primeNumbers.Count() && primeNumbers[indexOfActualPrime] <= maximumValue; indexOfActualPrime++)
+                primesToString += primeNumbers[indexOfActualPrime] + " ";
+
             return primesToString;
+        }
+
+        //To Test Only
+        public  async Task<string> ToString()
+        {
+            return await connectAllPrimes();
         }
 
 
@@ -45,7 +52,7 @@ namespace SpiralaUlama
             }
 
             int index = 0;
-            while( index < primeNumbers.Count() && maximumValue >= primeNumbers[index])
+            while( index < primeNumbers.Count && maximumValue >= primeNumbers[index])
                 index++;
 
             return primeNumbers.GetRange(0,index);
@@ -53,7 +60,7 @@ namespace SpiralaUlama
 
 
 
-        public int FindPrimesToNumber(int maximumValue)
+        public async Task<int> FindPrimesToNumber(int maximumValue)
         {
             // już mamy obliczone liczby pierwsze do tego zakresu
             if (maximumValue > this.maximumValue)

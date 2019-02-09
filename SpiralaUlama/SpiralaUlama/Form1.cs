@@ -17,13 +17,13 @@ namespace SpiralaUlama
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {
             string s = textBoxWpiszZakresLP.Text;
             int result;
             if (Int32.TryParse(s, out result))
             {
-                int toWhere = PrimeNumbers.SingletonPrimeNumbers().FindPrimesToNumber(result);
+                int toWhere = await PrimeNumbers.GetSingleton().FindPrimesToNumber(result);
                 textBoxInfoAboutPrimeGen.Text = $"Wpisz Zakres (Generuj liczby pierwsze (aktualnie) do: {toWhere})";
             }
 
@@ -54,26 +54,32 @@ namespace SpiralaUlama
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private  async void button3_Click(object sender, EventArgs e)
         {
-            var primesList = PrimeNumbers.SingletonPrimeNumbers().ReturnPrimeNumbersTo(PrimeNumbers.SingletonPrimeNumbers().MaximumValue);
-            string stringWithPrimes = "";
-            foreach (var pierwsza in primesList)
-                stringWithPrimes += pierwsza + " ";
-
-            textBoxOkienkoDoWypisaniaLiczbPierwszych.Text = stringWithPrimes;
+            textBoxOkienkoDoWypisaniaLiczbPierwszych.Text = await PrimeNumbers.GetSingleton().ToString();
+            panel1.Visible = false;
             textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = false;
+            panel1.Visible = true;
+            SpiralaUlama spiralaUlama = new SpiralaUlama();
+            spiralaUlama.GenerujPunkty();
+            spiralaUlama.Narysuj(panel1);
 
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)
         {
-            textBoxOkienkoDoWypisaniaLiczbPierwszych.Width = this.Width-40;
-            textBoxOkienkoDoWypisaniaLiczbPierwszych.Height = this.Height - 240;
+            panel1.Width = textBoxOkienkoDoWypisaniaLiczbPierwszych.Width = this.Width-40;
+            panel1.Height = textBoxOkienkoDoWypisaniaLiczbPierwszych.Height = this.Height - 240;     
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

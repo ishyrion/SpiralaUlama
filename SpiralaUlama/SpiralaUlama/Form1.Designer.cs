@@ -34,6 +34,7 @@
             this.textBoxOkienkoDoWypisaniaLiczbPierwszych = new System.Windows.Forms.TextBox();
             this.WygenerujSpiraleUlama = new System.Windows.Forms.Button();
             this.WypiszLiczbyPierwsze = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // Generuj
@@ -95,6 +96,16 @@
             this.WypiszLiczbyPierwsze.UseVisualStyleBackColor = true;
             this.WypiszLiczbyPierwsze.Click += new System.EventHandler(this.button3_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.SystemColors.Window;
+            this.panel1.Location = new System.Drawing.Point(20, 200);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(760, 360);
+            this.panel1.TabIndex = 7;
+            this.panel1.Visible = false;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -102,10 +113,11 @@
             this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.WypiszLiczbyPierwsze);
             this.Controls.Add(this.WygenerujSpiraleUlama);
-            this.Controls.Add(this.textBoxOkienkoDoWypisaniaLiczbPierwszych);
             this.Controls.Add(this.textBoxWpiszZakresLP);
             this.Controls.Add(this.textBoxInfoAboutPrimeGen);
             this.Controls.Add(this.Generuj);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.textBoxOkienkoDoWypisaniaLiczbPierwszych);
             this.MinimumSize = new System.Drawing.Size(400, 400);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -124,6 +136,7 @@
         private System.Windows.Forms.TextBox textBoxOkienkoDoWypisaniaLiczbPierwszych;
         private System.Windows.Forms.Button WygenerujSpiraleUlama;
         private System.Windows.Forms.Button WypiszLiczbyPierwsze;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
