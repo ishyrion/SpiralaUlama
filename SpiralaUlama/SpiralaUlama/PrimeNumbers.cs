@@ -120,7 +120,7 @@ namespace SpiralaUlama
             for (int i = 0; i <= maximumValue; i += sizeOfSieve)
                 for(int j=0; j<candidatsFromSieve.Length; j++) {
                     int actualCandidateForPrime = i + candidatsFromSieve[j];
-                    if (actualCandidateForPrime <= 1)
+                    if (actualCandidateForPrime <= primeNumbers.Last())
                         continue;
                     int actualCandidateForPrimeSqrt = (int)Math.Sqrt(actualCandidateForPrime);
 

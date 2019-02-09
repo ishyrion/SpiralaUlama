@@ -41,48 +41,59 @@ namespace SpiralaUlama
         }
 
 
-        private List<Point> goInDirection(int vx, int vy)
+        private void goInDirection(int vx, int vy)
         {
-            var toReturn = new List<Point>();
+/*            Debug.WriteLine("Count = " + primeList.Count + "; Count() = " + primeList.Count());
+            foreach (var prime in primeList)
+                Debug.Write(prime + " ");
+            Debug.WriteLine("");
+*/
 
-            while( minx <= x && miny <= y && maxx >= x && maxy >= y )
+           while( minx <= x && miny <= y && maxx >= x && maxy >= y )
             {
                 x += vx;
                 y += vy;
                 value++;
 
                 if (value > maximumValue || actualPrime >= primeList.Count)
-                    return toReturn;
+                    return ;
+
+ //               Debug.Write("Sprawdzam liczbe: " + value);
 
                 if (checkIsPrime(value))
-                    toReturn.Add(new Point(x, y, value));
+                {
+                    punkty.Add(new Point(x, y, value));
+  //                  Debug.WriteLine(" TAK");
+                }
+                else
+                {
+  //                  Debug.WriteLine(" Nie");
+                }
             }
 
             if (minx > x) minx = x;
             if (miny > y) miny = y;
             if (maxx < x) maxx = x;
             if (maxy < y) maxy = y;
-
-            return toReturn;
         }
 
 
         public List<Point> GenerujPunkty()
         {
-            // x++  y
-            // x    y++
-            // x--  y
-            // x    y--
+            // x++  y       prawo
+            // x    y++     gora
+            // x--  y       lewo
+            // x    y--     dol
             int[,] vectorOfSpiralaMoves = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
-            Debug.WriteLine("Generowanie Punktow W spirali");
+      //      Debug.WriteLine("Generowanie Punktow W spirali");
 
             while (value <= maximumValue)
                 for (int vectorsTab = 0; vectorsTab < 4; vectorsTab++)
-                    punkty.AddRange(goInDirection(vectorOfSpiralaMoves[vectorsTab, 0], vectorOfSpiralaMoves[vectorsTab, 1]));
+                    goInDirection(vectorOfSpiralaMoves[vectorsTab, 0], vectorOfSpiralaMoves[vectorsTab, 1]);
 
 
-            Debug.WriteLine("Wygenerowane Punkty W spirali");
+     //       Debug.WriteLine("Wygenerowane Punkty W spirali");
             return punkty;
     }
 
@@ -92,6 +103,7 @@ namespace SpiralaUlama
             int maxymalnyRozmiarPanelu = Math.Min(panel.Height, panel.Width);
             int maxymalnyRozmiarSpirali = Math.Max(maxy - miny, maxx - minx);
             double ratio = ((double)maxymalnyRozmiarPanelu) / ((double)maxymalnyRozmiarSpirali);
+            Debug.WriteLine("Ratio = " + ratio);
             double srodekx =   panel.Width  / 2;
             double srodeky =   panel.Height  / 2;
 
@@ -105,11 +117,13 @@ namespace SpiralaUlama
                 double x = srodekx + actualnyPunkt.x * ratio;
                 double y = srodeky + actualnyPunkt.y * ratio;
 
-                Debug.WriteLine("Rysowanie " + actualnyPunkt.value + " na pozycji(x,y): (" + x + "," + y + ");");
-                g.FillRectangle(Brushes.Black, (int)x, (int)y, 10, 10);  //used 1,1 for a pixel only
+          //      Debug.WriteLine("Rysowanie " + actualnyPunkt.value + " na pozycji(x,y): (" + x + "," + y + ");");
+                int wielkoscLiczbyPierwszejWPixelach = 10; //used 1,1 for a pixel only
+                wielkoscLiczbyPierwszejWPixelach = Math.Min(10, Math.Max(1, (int)ratio));
+                g.FillRectangle(Brushes.Black, (int)x, (int)y, wielkoscLiczbyPierwszejWPixelach, wielkoscLiczbyPierwszejWPixelach);  
             }
 
-            Debug.WriteLine("MaximumValue = "+PrimeNumbers.GetSingleton().MaximumValue +" "+maximumValue);
+       //     Debug.WriteLine("MaximumValue = "+PrimeNumbers.GetSingleton().MaximumValue +" "+maximumValue);
         }
 
     }
