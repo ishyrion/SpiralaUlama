@@ -25,8 +25,8 @@ Zróbmy to samo, ale teraz będziemy zaznaczać tylko liczby pierwsze:
 Wygenerowaną w ten sposób spirale liczb pierwszych nazywamy Spiralą Ulama.
 Została ona zaproponowana przez polskiego uczonego Stanisława Ulama w 1963 roku.
 
-Program ma na celu wizualizację podanej spirali:
--wylicza liczby pierwsze,
--wypisuje liczby pierwsze,
--rysuje spirale 
+Program ma na celu wizualizację podanej spirali:<br>
+-wylicza liczby pierwsze,<br>
+-wypisuje liczby pierwsze,<br>
+-rysuje spirale <br>
 dla zadanego zakresu liczb pierwszych.
