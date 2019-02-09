@@ -10,6 +10,7 @@ https://pl.khanacademy.org/computing/computer-science/cryptography/comp-number-t
 krótki opis:
 Wypiszmy Liczby w Spirali, zaczynając od środka ( od 1 ) i poruszając się po spirali będziemy wypisywać kolejne liczby.
 Coś na kształt:
+<code>
               3    4 3    5 4 3    5 4 3    5 4 3    5 4 3    5 4 3    5 4 3       5 4 3       5 4 3 12
 1 -> 1 2 -> 1 2 -> 1 2 ->   1 2 -> 6 1 2 -> 6 1 2 -> 6 1 2 -> 6 1 2 -> 6 1 2    -> 6 1 2 11 -> 6 1 2 11 -> itd.
                                             7        7 8      7 8 9    7 8 9 10    7 8 9 10    7 8 9 10
@@ -19,7 +20,7 @@ Zróbmy to samo, ale teraz będziemy zaznaczać tylko liczby pierwsze:
               3      3    5   3    5   3    5   3    5   3    5   3    5   3       5   3       5   3   
   ->   2 ->   2 ->   2 ->     2 ->     2 ->     2 ->     2 ->     2 ->     2    ->     2 11 ->     2 11 -> itd.
                                             7        7        7        7           7           7       
-                                            
+</code>                                      
 Wygenerowaną w ten sposób spirale liczb pierwszych nazywamy Spiralą Ulama.
 Została ona zaproponowana przez polskiego uczonego Stanisława Ulama w 1963 roku.
 
