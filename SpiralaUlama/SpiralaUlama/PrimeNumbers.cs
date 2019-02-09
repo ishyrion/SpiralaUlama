@@ -20,29 +20,44 @@ namespace SpiralaUlama
             return singletonPrimeNumbers;
         }
 
-        public PrimeNumbers(int i = 2) {
-            if(i>=101)
+        /// <summary>
+        /// konstruktor; jesli istnieje zadany parametr, ktory jest wiekszy od naszego zakresu, to oblicz liczby pierwsze do tego zakresu
+        /// </summary>
+        /// <param name="i"></param>
+        public  PrimeNumbers(int i = 2) {
+            if(i>maximumValue)
                 FindPrimesToNumber(i);
             singletonPrimeNumbers = this;
         }
 
-
+        /// <summary>
+        /// ponieważ tych liczb pierwszych może byc sporo, aby szybciej zsumować liczbyPierwsze.ToString() posluzymy się StringBuilderem
+        /// </summary>
+        /// <returns></returns>
         private async Task<string> connectAllPrimes()
         {
-            string primesToString = "";
-            for (var indexOfActualPrime = 0; indexOfActualPrime < primeNumbers.Count() && primeNumbers[indexOfActualPrime] <= maximumValue; indexOfActualPrime++)
-                primesToString += primeNumbers[indexOfActualPrime] + " ";
+            StringBuilder builderPrimesToString = new StringBuilder();
 
-            return primesToString;
+            for (var indexOfActualPrime = 0; indexOfActualPrime < primeNumbers.Count() && primeNumbers[indexOfActualPrime] <= maximumValue; indexOfActualPrime++)
+                builderPrimesToString.Append(primeNumbers[indexOfActualPrime].ToString()).Append(" ");
+
+            return builderPrimesToString.ToString();
         }
 
-        //To Test Only
+        /// <summary>
+        /// return prime list as string
+        /// </summary>
+        /// <returns></returns>
         public  async Task<string> ToString()
         {
             return await connectAllPrimes();
         }
 
-
+        /// <summary>
+        /// return list of prime numbers to value given in parramentr
+        /// </summary>
+        /// <param name="maximumValue"></param>
+        /// <returns></returns>
         public List<int> ReturnPrimeNumbersTo(int maximumValue=0)
         {
             if (maximumValue > this.maximumValue)
@@ -59,16 +74,18 @@ namespace SpiralaUlama
         }
 
 
-
+        /// <summary>
+        /// znajdz liczby pierwsze do zakresu podanego w parametrze
+        /// </summary>
+        /// <param name="maximumValue"></param>
+        /// <returns></returns>
         public async Task<int> FindPrimesToNumber(int maximumValue)
         {
-            // już mamy obliczone liczby pierwsze do tego zakresu
-            if (maximumValue > this.maximumValue)
-            {
+            /// jesli mamy juz obliczone liczby pierwsze do tego zakresu, to nie musimy tego robic
+            if (maximumValue > primeNumbers.Last())
                 IncreaseListOfPrimesTo(maximumValue);
-                this.maximumValue = maximumValue;
-            }
-            return maximumValue;
+
+            return this.maximumValue = maximumValue ;
         }
 
 
@@ -82,15 +99,15 @@ namespace SpiralaUlama
             int MaximumSizeOfSieve = Math.Max(210,(int)Math.Sqrt(maximumValue));
             int sizeOfSieve = 2;
             int indexOfMaximumPrimeInSieve = 0;
-            Debug.Write("numbers in Sieve: 2 ");
+  //          Debug.Write("numbers in Sieve: 2 ");
             while (indexOfMaximumPrimeInSieve + 1 < primeNumbers.Count() && sizeOfSieve * primeNumbers[indexOfMaximumPrimeInSieve + 1] <= MaximumSizeOfSieve)
-            {
+  //          {
                 sizeOfSieve *= primeNumbers[++indexOfMaximumPrimeInSieve];
-                Debug.Write(primeNumbers[indexOfMaximumPrimeInSieve] + " ");
+   /*             Debug.Write(primeNumbers[indexOfMaximumPrimeInSieve] + " ");
             }
             Debug.WriteLine("");
             Debug.WriteLine("sizeOfSieve = "+ sizeOfSieve);
-
+*/
             bool[] sieve = new bool[sizeOfSieve + 1];
             for (int i = 0; i < sieve.Length; i++)
                 sieve[i] = true;
@@ -106,17 +123,17 @@ namespace SpiralaUlama
                     howManyCadidatsInSieve++;
 
             int[] candidatsFromSieve = new int[howManyCadidatsInSieve];
-            Debug.Write("Candidats in Sieve: ");
+  //          Debug.Write("Candidats in Sieve: ");
             for (int i = 0, actualCandidat = 0; i < sieve.Length; i++)
                 if (sieve[i])
-                {
+  //              {
                     candidatsFromSieve[actualCandidat++] = i;
-                    Debug.Write(i + " ");
+ /*                   Debug.Write(i + " ");
                 }
             Debug.WriteLine("");
             Debug.WriteLine("Numbers of Candidats = " + candidatsFromSieve.Length);
             Debug.WriteLine("Founded Primes: ");
-
+*/
             for (int i = 0; i <= maximumValue; i += sizeOfSieve)
                 for(int j=0; j<candidatsFromSieve.Length; j++) {
                     int actualCandidateForPrime = i + candidatsFromSieve[j];
@@ -129,12 +146,11 @@ namespace SpiralaUlama
                         range++;
 
                     if (actualCandidateForPrime % primeNumbers[range] != 0)
-                    {
+ //                   {
                         primeNumbers.Add(actualCandidateForPrime);
-                        Debug.Write(actualCandidateForPrime + " ");
+  /*                      Debug.Write(actualCandidateForPrime + " ");
                     }
-                }
-
+   */             }
         }
 
 

@@ -61,14 +61,31 @@ namespace SpiralaUlama
             textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = true;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        void narysujSpiraleUlama()
         {
-            textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = false;
-            panel1.Visible = true;
             SpiralaUlama spiralaUlama = new SpiralaUlama();
             spiralaUlama.GenerujPunkty();
-            spiralaUlama.Narysuj(panel1);
+            var toDrawList = spiralaUlama.GetValues(panel1.Height, panel1.Width);
 
+
+
+            panel1.Refresh();
+            Graphics g = panel1.CreateGraphics();
+
+            //      Debug.WriteLine("Rysowanie " + actualnyPunkt.value + " na pozycji(x,y): (" + x + "," + y + ");");
+            int wielkoscKwadracikaDoNarysowania = Math.Min(10, Math.Max(1, (int)toDrawList.Item2));// Rectangle(1,1) === pixel // more or less ;)
+
+            foreach(var point in toDrawList.Item1)
+            g.FillRectangle(Brushes.Black, (int)point.Item1, (int)point.Item2, wielkoscKwadracikaDoNarysowania, wielkoscKwadracikaDoNarysowania);
+
+        }
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {        
+            textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = false;
+            panel1.Visible = true;
+            narysujSpiraleUlama();
         }
 
         private void Form1_SizeChanged(object sender, EventArgs e)

@@ -11,18 +11,20 @@ namespace SpiralaUlama
 
     class SpiralaUlama
     {
-        private List<Point> punkty;
-        private int x, y;
-        private int minx, miny;
-        private int maxx, maxy;
-        private int value;
-        private int maximumValue;
-        private List<int> primeList;
-        private int actualPrime;
+        private List<Tuple<int,int>> punkty; /// punkty na spirali ulama
+        private int x, y; /// aktualne polozonie przy generowanie spirali
+        private int minx, miny; /// minimalne wartosci x,y w spirali ulama ( w programie, przyjmuje ona dosc kwadratowa postac)
+        private int maxx, maxy; /// maxymalne wartosci x,y w spirali ulama
+        private int value; /// aktualna wartosc liczbowa przy generacji ulama 1..value..maximumValue
+        private int maximumValue; /// wartosc do ktorej darzymy; ekstremum naszej funkcji
+        private List<int> primeList; /// lista liczb pierwszych przez ktore bedziemy przechodzic
+        private int actualPrime; /// wskaznik do kolejnej wartosci liczby pierwszej; minimalna liczba pierwsza ktora jest wieksza od value
 
+
+        ///inicjacja
         public SpiralaUlama()
         {
-            punkty = new List<Point>();
+            punkty = new List<Tuple<int,int>>();
             maximumValue = PrimeNumbers.GetSingleton().MaximumValue;
             primeList = PrimeNumbers.GetSingleton().ReturnPrimeNumbersTo(maximumValue);
 
@@ -31,6 +33,8 @@ namespace SpiralaUlama
             actualPrime = 0;
         }
 
+
+        ///sprawdzamy czy aktualna wartosc na spirali (value) jest kolejna liczba pierwsza
         private bool checkIsPrime(int value)
         {
             if(value == primeList[actualPrime]){
@@ -40,7 +44,7 @@ namespace SpiralaUlama
             return false;
         }
 
-
+        /// majac podany vektor poruszania sie naszej spirali (vx,vy), poruszamy sie, dopoki nie wykroczymy poza aktualne granice spirali lub nie osiagniemy maxymalnej wartosci liczbowej
         private void goInDirection(int vx, int vy)
         {
 /*            Debug.WriteLine("Count = " + primeList.Count + "; Count() = " + primeList.Count());
@@ -49,6 +53,7 @@ namespace SpiralaUlama
             Debug.WriteLine("");
 */
 
+            ///wykonuj petle, dopoki nie wykroczymy poza spirale => musimy zmienic wektor poruszania się
            while( minx <= x && miny <= y && maxx >= x && maxy >= y )
             {
                 x += vx;
@@ -61,29 +66,33 @@ namespace SpiralaUlama
  //               Debug.Write("Sprawdzam liczbe: " + value);
 
                 if (checkIsPrime(value))
-                {
-                    punkty.Add(new Point(x, y, value));
-  //                  Debug.WriteLine(" TAK");
+    //            {
+                    punkty.Add ( new Tuple<int, int>( x,y) );
+  /*                 Debug.WriteLine(" TAK");
                 }
                 else
                 {
-  //                  Debug.WriteLine(" Nie");
+                    Debug.WriteLine(" Nie");
                 }
-            }
+  */          }
 
+           ///jesli vector poruszania sie wyprowadzil nas poza spirale i musimy zmienic kierunek, to musimy tez uaktualnic wartosc, poza ktora nasza spirala wykroczyla
             if (minx > x) minx = x;
             if (miny > y) miny = y;
             if (maxx < x) maxx = x;
             if (maxy < y) maxy = y;
         }
 
-
-        public List<Point> GenerujPunkty()
+        /// <summary>
+        /// Generuje punkty w spirali 
+        /// </summary>
+        public void GenerujPunkty()
         {
-            // x++  y       prawo
-            // x    y++     gora
-            // x--  y       lewo
-            // x    y--     dol
+            /// x++  y       prawo
+            /// x    y++     gora
+            /// x--  y       lewo
+            /// x    y--     dol
+            ///  vektory poruszania się naszej spirali
             int[,] vectorOfSpiralaMoves = { { 1, 0 }, { 0, 1 }, { -1, 0 }, { 0, -1 } };
 
       //      Debug.WriteLine("Generowanie Punktow W spirali");
@@ -94,36 +103,31 @@ namespace SpiralaUlama
 
 
      //       Debug.WriteLine("Wygenerowane Punkty W spirali");
-            return punkty;
     }
 
-
-        public void Narysuj(System.Windows.Forms.Panel panel)
+        /// <summary>
+        /// Generuje liste i gdzie dokladnie ja wyswietlic dla zadanej wysokosci i szerokosci pojemnika 
+        /// </summary>
+        /// <param name="maxHeight"></param>
+        /// <param name="maxWidth"></param>
+        /// <returns></returns>
+        public Tuple<List<Tuple<int,int>>,double> GetValues(int maxHeight, int maxWidth)
         {
-            int maxymalnyRozmiarPanelu = Math.Min(panel.Height, panel.Width);
-            int maxymalnyRozmiarSpirali = Math.Max(maxy - miny, maxx - minx);
-            double ratio = ((double)maxymalnyRozmiarPanelu) / ((double)maxymalnyRozmiarSpirali);
-            Debug.WriteLine("Ratio = " + ratio);
-            double srodekx =   panel.Width  / 2;
-            double srodeky =   panel.Height  / 2;
+//            int maxymalnyRozmiarPanelu = Math.Min(panelHeight, panelWidth);
+//            int maxymalnyRozmiarSpirali = Math.Max(maxy - miny, maxx - minx);
+            double ratioX = ((double)maxWidth) / ((double)(maxx - minx));
+            double ratioY = ((double)maxHeight) / ((double)(maxy - miny));
+            //           Debug.WriteLine("Ratio = " + ratio);
+            double srodekx =   maxWidth  / 2;
+            double srodeky =   maxHeight  / 2;
 
-
-            panel.Refresh();
-            Graphics g = panel.CreateGraphics();
 
             //for(int i=0; i<punkty.Count(); i++){
-            foreach(Point actualnyPunkt in punkty) { 
-                // narysuj liczbe pierwsza
-                double x = srodekx + actualnyPunkt.x * ratio;
-                double y = srodeky + actualnyPunkt.y * ratio;
+            var listToReturn = new List<Tuple<int, int>>();
+            foreach(var actualnyPunkt in punkty) 
+                listToReturn.Add(new Tuple<int,int>((int)(srodekx + actualnyPunkt.Item1 * ratioX), (int)(srodeky + actualnyPunkt.Item2 * ratioY)));
 
-          //      Debug.WriteLine("Rysowanie " + actualnyPunkt.value + " na pozycji(x,y): (" + x + "," + y + ");");
-                int wielkoscLiczbyPierwszejWPixelach = 10; //used 1,1 for a pixel only
-                wielkoscLiczbyPierwszejWPixelach = Math.Min(10, Math.Max(1, (int)ratio));
-                g.FillRectangle(Brushes.Black, (int)x, (int)y, wielkoscLiczbyPierwszejWPixelach, wielkoscLiczbyPierwszejWPixelach);  
-            }
-
-       //     Debug.WriteLine("MaximumValue = "+PrimeNumbers.GetSingleton().MaximumValue +" "+maximumValue);
+            return new Tuple< List<Tuple<int,int>>,double > (listToReturn, Math.Min(ratioX,ratioY));
         }
 
     }
