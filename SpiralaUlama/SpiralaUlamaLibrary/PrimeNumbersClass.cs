@@ -29,7 +29,6 @@ namespace SpiralaUlamaLibrary
                 FindPrimesToNumber(i);
             singletonPrimeNumbers = this;
         }
-
         /// <summary>
         /// ponieważ tych liczb pierwszych może byc sporo, aby szybciej zsumować liczbyPierwsze.ToString() posluzymy się StringBuilderem
         /// </summary>
