@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SpiralaUlamaLibrary;
+
 
 namespace SpiralaUlama
 {
@@ -23,7 +20,7 @@ namespace SpiralaUlama
             int result;
             if (Int32.TryParse(s, out result))
             {
-                int toWhere = await PrimeNumbers.GetSingleton().FindPrimesToNumber(result);
+                int toWhere = await SpiralaUlamaLibrary.PrimeNumbersClass.GetSingleton().FindPrimesToNumber(result);
                 textBoxInfoAboutPrimeGen.Text = $"Wpisz Zakres (Generuj liczby pierwsze (aktualnie) do: {toWhere})";
             }
 
@@ -56,14 +53,14 @@ namespace SpiralaUlama
 
         private  async void button3_Click(object sender, EventArgs e)
         {
-            textBoxOkienkoDoWypisaniaLiczbPierwszych.Text = await PrimeNumbers.GetSingleton().ToString();
+            textBoxOkienkoDoWypisaniaLiczbPierwszych.Text = await PrimeNumbersClass.GetSingleton().ToString();
             panel1.Visible = false;
             textBoxOkienkoDoWypisaniaLiczbPierwszych.Visible = true;
         }
 
         void narysujSpiraleUlama()
         {
-            SpiralaUlama spiralaUlama = new SpiralaUlama();
+            SpiralaUlamaClass spiralaUlama = new SpiralaUlamaClass();
             spiralaUlama.GenerujPunkty();
             var toDrawList = spiralaUlama.GetValues(panel1.Height, panel1.Width);
 
@@ -75,8 +72,12 @@ namespace SpiralaUlama
             //      Debug.WriteLine("Rysowanie " + actualnyPunkt.value + " na pozycji(x,y): (" + x + "," + y + ");");
             int wielkoscKwadracikaDoNarysowania = Math.Min(10, Math.Max(1, (int)toDrawList.Item2));// Rectangle(1,1) === pixel // more or less ;)
 
-            foreach(var point in toDrawList.Item1)
-            g.FillRectangle(Brushes.Black, (int)point.Item1, (int)point.Item2, wielkoscKwadracikaDoNarysowania, wielkoscKwadracikaDoNarysowania);
+      //      Debug.WriteLine("Rysuje Punkty Spirali: ");
+            foreach (var point in toDrawList.Item1)
+      //      {
+                g.FillRectangle(Brushes.Black, (int)point.Item1, (int)point.Item2, wielkoscKwadracikaDoNarysowania, wielkoscKwadracikaDoNarysowania);
+      //          Debug.WriteLine("x = " + (int)point.Item1 + "; y = " + (int)point.Item2 + "; wielkoscKwadracikaDoNarysowania = " + wielkoscKwadracikaDoNarysowania);
+     //       }
 
         }
 
