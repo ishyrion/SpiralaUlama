@@ -17,6 +17,6 @@
         <Grid x:Name="gridPanelDoRysowaniaSpirali"  Margin="10,119,10,10"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
         <Button x:Name="buttonOdwrocKolorystykeRysowaniaSpirali" Content="Odwróć kolorystyke spirali (negatyw)" HorizontalAlignment="Left" Height="25" Margin="9,89,0,0" VerticalAlignment="Top" Width="201" Click="ButtonOdwrocKolorystykeRysowaniaSpirali_Click"/>
         <Button x:Name="buttonNarysujSpiraleNaCalejPowierzchni" Content="Narysuj spirale na calej Powierzchni" HorizontalAlignment="Left" Height="25" Margin="216,89,0,0" VerticalAlignment="Top" Width="194" Click="ButtonNarysujSpiraleNaCalejPowierzchni_Click"/>
-  
+
     </Grid>
 </Window>

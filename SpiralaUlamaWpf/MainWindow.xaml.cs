@@ -24,37 +24,56 @@ namespace SpiralaUlamaWpf
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        /// <summary>
+        /// Inicjalizacja:
+        /// ukryj 2 okienka: 
+        /// - do wypisywania liczb pierwszych
+        /// - do rysowania spirali 
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
             textBoxDoWyswietlaniaLiczbPierwszych.Visibility = System.Windows.Visibility.Hidden;
-            gridPanelDoRysowaniaSpirali.Visibility = System.Windows.Visibility.Visible;
-        }
-   
-        
-        private void DopasujWielkosci()
-        {
-            textBoxDoWyswietlaniaLiczbPierwszych.Width = windowMainUI.ActualWidth - 30;
-            textBoxDoWyswietlaniaLiczbPierwszych.Height = windowMainUI.ActualHeight - 309;
-            gridPanelDoRysowaniaSpirali.Width = windowMainUI.ActualWidth-30;
-            gridPanelDoRysowaniaSpirali.Height = windowMainUI.ActualHeight - 309;
+            gridPanelDoRysowaniaSpirali.Visibility = System.Windows.Visibility.Hidden;
         }
 
+        /// <summary>
+        /// dopasuj wielkosc okienka do wyswietlania spirali
+        /// </summary>
+        private async void DopasujWielkosciOkienkaDoRysowaniaSpirali()
+        {
+            gridPanelDoRysowaniaSpirali.Width = gridPodstawkaUI.ActualWidth;
+
+            if(!gridPanelDoRysowaniaSpirali.Equals(gridPodstawkaUI))
+                gridPanelDoRysowaniaSpirali.Height = gridPodstawkaUI.ActualHeight - 161;
+            if(gridPanelDoRysowaniaSpirali.IsVisible)
+                await Task.Run(() => NarysujSpiraleUlama());
+
+        }
+
+
+        /// <summary>
+        /// gdy zmienia się wielkość głównego okienka: dopasuj wielkośc okieneka do rysowania spirali
+        /// </summary>
         private void WindowMainUI_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             // calculates incorrect when window is maximized
-            // DopasujWielkosci();   
+            DopasujWielkosciOkienkaDoRysowaniaSpirali();   
             
         }
 
+        /// <summary>
+        /// gdy zmienia się Stan głównego okienka (maximized,minimized,normal): dopasuj wielkośc okieneka do rysowania spirali
+        /// </summary>
         private void WindowMainUI_StateChanged(object sender, EventArgs e)
         {
-            // DopasujWielkosci();   
+            DopasujWielkosciOkienkaDoRysowaniaSpirali();   
         }
 
        
 
-
+        ///
         private async void ButtonZmienZakres_Click(object sender, RoutedEventArgs e)
         {
             string s = textBoxTuWpiszLiczbe.Text;

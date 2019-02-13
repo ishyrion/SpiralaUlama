@@ -53,8 +53,6 @@ namespace SpiralaUlamaUnitTest
         }
 
 
-        //GetValues(double maxHeight, double maxWidth, out Tuple<List<Tuple<int, int>>, double> toReturn)
-
         [TestMethod]
         [Timeout(2000)]
         [DataRow(-123, 0)]
@@ -91,10 +89,6 @@ namespace SpiralaUlamaUnitTest
 
             Assert.Equals(tuple.Item1.Count, expectedNumberOfPrimesAndPoints);
             Assert.IsTrue(tuple.Item2 > 0);
-
-           // Assert.IsInstanceOfType(new SpiralaUlamaGenerator().GetValues(value1, value2, out tuple),
-
-
         }
 
     }
