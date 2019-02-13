@@ -1,0 +1,9 @@
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\bin\Debug\netstandard2.0\SpiralaUlamaLibrary.deps.json
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\bin\Debug\netstandard2.0\SpiralaUlamaLibrary.dll
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\bin\Debug\netstandard2.0\SpiralaUlamaLibrary.pdb
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.csprojAssemblyReference.cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.AssemblyInfoInputs.cache
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.AssemblyInfo.cs
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.dll
+C:\Users\Komputer\source\repos\SpiralaUlama\SpiralaUlamaLibrary\obj\Debug\netstandard2.0\SpiralaUlamaLibrary.pdb
