@@ -14,23 +14,28 @@ namespace SpiralaUlamaLibrary
         private List<int> primeNumbers = new List<int> { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };///Lista liczb pierwszych
         private int maximumValue = 97;///maxymalna wartosc do której generujemy liczby pierwsze, prywatna
         public int MaximumValue { get => maximumValue; set => maximumValue = value; }///dostępność do maximumValue 
-        static private PrimeNumbersGenerator singletonPrimeNumbers;
-        static public PrimeNumbersGenerator GetSingleton()/// potrzebujemy tylko 1 takiego obiektu, więc bedziemy zwracać wskaźnik do tego obiektu
+        static private PrimeNumbersGenerator singletonPrimeNumbersGenerator;
+
+        /// <summary>
+        /// Potrzebujemy tylko 1 obiektu wyliczającego liczby pierwsze, dlatego zrobilismy go Singletonem.
+        /// </summary>
+        /// <returns>Singleton == bedziemy zwracać wskaźnik do tego obiektu</returns>
+        static public PrimeNumbersGenerator GetSingleton()
         {
-            if (singletonPrimeNumbers is null)
-                singletonPrimeNumbers = new PrimeNumbersGenerator();
-            return singletonPrimeNumbers;
+            if (singletonPrimeNumbersGenerator is null)
+                singletonPrimeNumbersGenerator = new PrimeNumbersGenerator();
+            return singletonPrimeNumbersGenerator;
         }
 
         /// <summary>
-        /// konstruktor; jesli istnieje zadany parametr, ktory jest wiekszy od naszego zakresu, to oblicz liczby pierwsze do tego zakresu
+        /// konstruktor; prywatny, bo chcemy zeby sie odwolywac do tej Klasy przez Singleton
         /// </summary>
-        /// <param name="i"></param>
-        public PrimeNumbersGenerator(int maximumValue= 2)
+        /// <param name="maximumValue">generuj liczby do podanego parametru</param>
+        private PrimeNumbersGenerator(int maximumValue= 2)
         {
             if (this.maximumValue < maximumValue)
                 FindPrimesTo( maximumValue);
-            singletonPrimeNumbers = this;
+            singletonPrimeNumbersGenerator = this;
         }
 
 
@@ -52,10 +57,9 @@ namespace SpiralaUlamaLibrary
         /// <summary>
         /// return list of prime numbers to value given in parramentr
         /// </summary>
-        /// <param name="maximumValue">maxymalna wartosc do której  generujemy liczby pierwsze</param>
-        /// <param name="toReturn">lista do której zapiszemy liczby pierwsze</param>
-        /// <returns>zwraca wskaznik do aktualnego obiektu = Klasy PrimeNumbersGenerator</returns>
-        public PrimeNumbersGenerator GetValuesTo(out List<int> toReturn, int maximumValue = 0)
+        /// <param name="maximumValue">maxymalna wartosc do której  zwracamy liczby pierwsze</param>
+        /// <returns>zwraca liste liczb pierwszych do podanej wartosci ( domyslnie do 0)</returns>
+        public List<int> GetValuesTo(int maximumValue = 0)
         {
             if (maximumValue > primeNumbers.Last())
                 IncreaseListOfPrimesTo(maximumValue);
@@ -64,8 +68,7 @@ namespace SpiralaUlamaLibrary
             while (index < primeNumbers.Count && maximumValue >= primeNumbers[index])
                 index++;
 
-            toReturn =  primeNumbers.GetRange(0, index);
-            return this;
+            return primeNumbers.GetRange(0, index);
         }
 
 
@@ -76,7 +79,7 @@ namespace SpiralaUlamaLibrary
         /// <returns>zwraca wskaznik do aktualnego obiektu = Klasy PrimeNumbersGenerator</returns>
         public PrimeNumbersGenerator FindPrimesTo(int maximumValue)
         {
-            /// jesli mamy juz obliczone liczby pierwsze do tego zakresu, to nie musimy tego robic
+            // jesli mamy juz obliczone liczby pierwsze do tego zakresu, to nie musimy tego robic
             if (maximumValue > primeNumbers.Last())
                 IncreaseListOfPrimesTo(maximumValue);
 
@@ -141,10 +144,5 @@ namespace SpiralaUlamaLibrary
                 }
             return this;
         }
-
-
-
-
-
     }
 }

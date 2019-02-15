@@ -54,9 +54,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrimeNumbersTests.cs" />
+    <Compile Include="PrimeNumbersGeneratorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SpiralaUlamaTests.cs" />
+    <Compile Include="SpiralaUlamaGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

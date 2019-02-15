@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SpiralaUlamaLibrary</name>
+    </assembly>
+    <members>
+        <member name="T:SpiralaUlamaLibrary.GoldenSpiralWithOnlyPrimeNumbersGenerator">
+            <summary>
+            Ciekawe zagadnienie. Możliwość dalszej eskalacji programu.
+            </summary>
+            <remarks>
+            <para>Ta klasa będzie generowała punkty na złotej spirali:</para>
+            <para>przy pomocy liczb fibonnaciego, będziemy generować kolejne punkty (tylko liczby pierwsze ) na złotej spirali</para>
+            </remarks>
+        </member>
+        <member name="T:SpiralaUlamaLibrary.PrimeNumbersGenerator">
+            <summary>
+            Klasa służąca do generowania liczb pierwszych
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.PrimeNumbersGenerator.maximumValue">
+            Lista liczb pierwszych
+        </member>
+        <member name="P:SpiralaUlamaLibrary.PrimeNumbersGenerator.MaximumValue">
+            maxymalna wartosc do której generujemy liczby pierwsze, prywatna
+        </member>
+        <member name="F:SpiralaUlamaLibrary.PrimeNumbersGenerator.singletonPrimeNumbersGenerator">
+            dostępność do maximumValue 
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.GetSingleton">
+            <summary>
+            Potrzebujemy tylko 1 obiektu wyliczającego liczby pierwsze, dlatego zrobilismy go Singletonem.
+            </summary>
+            <returns>Singleton == bedziemy zwracać wskaźnik do tego obiektu</returns>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.#ctor(System.Int32)">
+            <summary>
+            konstruktor; prywatny, bo chcemy zeby sie odwolywac do tej Klasy przez Singleton
+            </summary>
+            <param name="maximumValue">generuj liczby do podanego parametru</param>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.ToString">
+            <summary>
+            return prime list as string
+            ponieważ tych liczb pierwszych może byc sporo, aby szybciej zsumować liczbyPierwsze.ToString() posluzymy się StringBuilderem
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.GetValuesTo(System.Int32)">
+            <summary>
+            return list of prime numbers to value given in parramentr
+            </summary>
+            <param name="maximumValue">maxymalna wartosc do której  zwracamy liczby pierwsze</param>
+            <returns>zwraca liste liczb pierwszych do podanej wartosci ( domyslnie do 0)</returns>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.FindPrimesTo(System.Int32)">
+            <summary>
+            znajdz liczby pierwsze do zakresu podanego w parametrze
+            </summary>
+            <param name="maximumValue">maxymalna wartosc do której  wyszukujemy liczby pierwsze</param>
+            <returns>zwraca wskaznik do aktualnego obiektu = Klasy PrimeNumbersGenerator</returns>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.IncreaseListOfPrimesTo(System.Int32)">
+            <summary>
+            Do obliczeń dużych liczb pierwszych posłużymy się sitem Eratostenesa
+            
+            https://pl.wikipedia.org/wiki/Sito_Eratostenesa
+            </summary>
+            <param name="maximumValue">maxymalna wartosc do której  wyszukujemy liczby pierwsze</param>
+            <returns>zwraca wskaznik do aktualnego obiektu = Klasy PrimeNumbersGenerator</returns>
+        </member>
+        <member name="T:SpiralaUlamaLibrary.SpiralaUlamaGenerator">
+            <summary>
+            <para>Klasa służąca do:</para>
+            <list type="doCzegoSluzyKlasa">
+            <item>
+            <term>GenerujPunkty</term>
+            <para><description>1.) Generowania punktów na spirali ulama. Metoda:</description></para>
+            </item>
+            <item>
+            <para>2.) Obliczaniu i zwracaniu gdzie maja leżeć na obiekcie o zadanych maxymalnych parametrach x,y. Metoda: <see cref="!:SpiralaUlamaGenerator.GetValues(double, double, out Tuple&lt;List&lt;Tuple&lt;int, int&gt;&gt;, int&gt;)"/> </para>
+            </item>
+            </list>
+            <para>Uzywa osobnej klasy <c>PrimeNumbersGenerator</c> do wyliczenia listy punktow pierwszych,
+            sluzacych za podstawe w Spirali Ulama.</para>
+            <para>Klasa: <see cref="T:SpiralaUlamaLibrary.PrimeNumbersGenerator"/> Metoda: 
+            <see cref="M:SpiralaUlamaLibrary.PrimeNumbersGenerator.GetValuesTo(System.Int32)"/></para>
+            </summary>
+            <remarks>
+            <para>Dla zadanych maxymalnych rozmiarow planszy do wypisywania,
+            dokladnie oblicza polozenie generowanych punktow (dla zadanej rozmiarami planszy).</para>
+            </remarks>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.punkty">
+            <summary>
+            do tej <c>List</c> generujemy punkty spirali ulama
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.x">
+            <summary>
+            aktualne polozonie przy generowanie spirali
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.y">
+            <summary>
+            aktualne polozonie przy generowanie spirali
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.minx">
+            <summary>
+            aktualnie minimalne wartosci x,y w aktualnie powiekszajacej się(aktualnie generowanej) spirali ulama ( w praktyce przyjmuje ona dosc kwadratowa postac)
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.miny">
+            <summary>
+            aktualnie minimalne wartosci x,y w aktualnie powiekszajacej się(aktualnie generowanej) spirali ulama ( w praktyce przyjmuje ona dosc kwadratowa postac)
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.maxx">
+            <summary>
+             aktualnie maxymalne wartosci x,y w aktualnie powiekszajacej się(aktualnie generowanej) spirali ulama ( w praktyce przyjmuje ona dosc kwadratowa postac)
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.maxy">
+            <summary>
+             aktualnie maxymalne wartosci x,y w aktualnie powiekszajacej się(aktualnie generowanej) spirali ulama ( w praktyce przyjmuje ona dosc kwadratowa postac)
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.value">
+            <summary>
+            aktualna wartosc liczbowa przy generacji ulama 1..value..maximumValue
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.maximumValue">
+            <summary>
+            wartosc do ktorej darzymy; ekstremum naszej funkcji
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.primeList">
+            <summary>
+            lista liczb pierwszych przez ktore bedziemy przechodzic
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.actualPrime">
+            <summary>
+            wskaznik do wartosci w Liscie liczb pierwszych do kolejnej wartosci liczby pierwszej; minimalna liczba pierwsza ktora jest wieksza od value
+            </summary>
+        </member>
+        <member name="F:SpiralaUlamaLibrary.SpiralaUlamaGenerator.singletonSpiralaUlamaGenerator">
+            <summary>
+            singleton danej Klasy
+            </summary>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.SpiralaUlamaGenerator.#ctor">
+            <summary>
+            Konstruktor prywatny; 
+            <para>Chcemy aby się odwoływać do klasy tylko przez Singleton</para>
+            </summary>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.SpiralaUlamaGenerator.GetSingleton">
+            <summary>
+            Chcemy aby była tylko 1 instancja tej klasy, wieć uzywamy wzorca: Singleton
+            </summary>
+            <returns>zwraca wskaznik do singletona tej klasy</returns>
+        </member>
+        <member name="M:SpiralaUlamaLibrary.SpiralaUlamaGenerator.GetValues(System.Double,System.Double,System.Tuple{System.Collections.Generic.List{System.Tuple{System.Int32,System.Int32}},System.Int32}@,System.Nullable{System.Int32})">
+            <summary>
+            Generuje punkty w spirali 
+            Posiadajac 4 vektory poruszania sie na spirali (prawo, gora, lewo, dol) wykonujemy kolejne ruchy dopoki nie osiagniemy maxymalnej zadanej wartosci liczbowej
+            </summary>
+            <param name="maxHeight">maksymalna wysokosc zrodla, sluzacego za podstawe do rysowania spirali</param>
+            <param name="maxWidth">maksymalna szerokosc zrodla, sluzacego za podstawe do rysowania spirali</param>
+            <param name="toReturn">do tego Tupletu zwrocimy dane(troche szybsze dzialanie)</param>
+            <param name="maximumValueOrNull">jest nie jest nullem, do tej wartosci wygenerujemy spirale</param>
+            
+            <returns>zwraca wskaznik do aktualnego obiektu = siebie = spirali ulama</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when one parameter maxHeight or maxWidth 
+             is lesser than 0.</exception>
+        </member>
+    </members>
+</doc>

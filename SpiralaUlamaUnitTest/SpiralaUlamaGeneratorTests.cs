@@ -1,0 +1,79 @@
+﻿using System;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using SpiralaUlamaLibrary;
+using System.Diagnostics;
+
+namespace SpiralaUlamaUnitTest
+{
+    [TestClass]
+    public class SpiralaUlamaGeneratorTests
+    {
+        [TestMethod]
+        [Timeout(2000)]
+        [DataRow(1, 1000)]
+        [DataRow(10, 1)]
+        public void IsTypeOfSpiralaUlamaGenerator(double value1, double value2)
+        {
+            Assert.IsInstanceOfType(SpiralaUlamaGenerator.GetSingleton(), typeof(SpiralaUlamaGenerator));
+            SpiralaUlamaGenerator.GetSingleton().GetValues(value1, value2, out Tuple<List<Tuple<int, int>>, int> tuple);
+            Assert.IsInstanceOfType(tuple, typeof(Tuple<List<Tuple<int, int>>, int>));
+        }
+
+
+        [TestMethod]
+        [Timeout(2000)]
+        [DataRow(-10, -01)]
+        [DataRow(-100, -0.00123)]
+        [DataRow(100, -100)]
+        [DataRow(-100, 100)]
+        public void DoesWrongDataThrowExceptionSpiralaUlamaGenerator(double value1, double value2)
+        {
+
+        Assert.ThrowsException<ArgumentOutOfRangeException>(() =>
+            SpiralaUlamaGenerator.GetSingleton().GetValues(value1, value2, out Tuple<List<Tuple<int, int>>, int> tuple));
+
+        }
+
+
+        [TestMethod]
+        [Timeout(2000)]
+        [DataRow(-123, 0)]
+        [DataRow(-4, 0)]
+        [DataRow(-3, 0)]
+        [DataRow(-2, 0)]
+        [DataRow(-1, 0)]
+        [DataRow(0, 0)]
+        [DataRow(1, 0)]
+        [DataRow(2, 1)]
+        [DataRow(3, 2)]
+        [DataRow(4, 2)]
+        [DataRow(5, 3)]
+        [DataRow(6, 3)]
+        [DataRow(7, 4)]
+        [DataRow(8, 4)]
+        [DataRow(9, 4)]
+        [DataRow(10, 4)]
+        [DataRow(11, 5)]
+        [DataRow(12, 5)]
+        [DataRow(13, 6)]
+        [DataRow(30, 10)]
+        [DataRow(100, 25)]
+        [DataRow(200, 46)]
+        [DataRow(500, 95)]
+        [DataRow(1000, 168)]
+        public void DoesSpiralaUlamaHaveRightAmountOfPoints(int generatePrimesToValue, int expectedNumberOfPrimesAndPoints)
+        {
+           SpiralaUlamaGenerator.GetSingleton().GetValues(1000, 1000, out Tuple<List<Tuple<int, int>>, int> tuple, generatePrimesToValue);
+
+           Assert.IsTrue(tuple.Item1.Count == expectedNumberOfPrimesAndPoints);
+        }
+
+
+
+
+    }
+}
