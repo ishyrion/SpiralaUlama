@@ -13,7 +13,7 @@ namespace SpiralaUlamaLibrary
     /// <para><description>1.) Generowania punktów na spirali ulama. Metoda:</description></para>
     /// </item>
     /// <item>
-    /// <para>2.) Obliczaniu i zwracaniu gdzie maja leżeć na obiekcie o zadanych maxymalnych parametrach x,y. Metoda: <see cref="SpiralaUlamaGenerator.GetValues(double, double, out Tuple{List{Tuple{int, int}}, int})"/> </para>
+    /// <para>2.) Obliczaniu i zwracaniu gdzie maja leżeć na obiekcie o zadanych maxymalnych parametrach x,y. Metoda: <see cref="SpiralaUlamaGenerator.GetValues"/> </para>
     /// </item>
     /// </list>
     /// <para>Uzywa osobnej klasy <c>PrimeNumbersGenerator</c> do wyliczenia listy punktow pierwszych,

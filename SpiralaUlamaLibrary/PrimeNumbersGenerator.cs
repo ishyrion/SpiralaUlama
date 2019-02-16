@@ -11,9 +11,23 @@ namespace SpiralaUlamaLibrary
     /// </summary>
     public class PrimeNumbersGenerator
     {
+        /// <summary>
+        /// lista w której przechowujemy listy pierwsze
+        /// <para>inicjujemy ja kilkomoa wartościami (do 100)</para>
+        /// <para>2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97</para>
+        /// </summary>
         private List<int> primeNumbers = new List<int> { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };///Lista liczb pierwszych
-        private int maximumValue = 97;///maxymalna wartosc do której generujemy liczby pierwsze, prywatna
-        public int MaximumValue { get => maximumValue; set => maximumValue = value; }///dostępność do maximumValue 
+        ///<summary>
+        ///maxymalna wartosc do której generujemy liczby pierwsze, prywatna
+        ///</summary>
+        private int maximumValue = 97;//maxymalna wartosc do której generujemy liczby pierwsze, prywatna
+        ///<summary>
+        ///dostępność do maximumValue 
+        ///</summary>
+        public int MaximumValue { get => maximumValue; set => maximumValue = value; }//dostępność do maximumValue 
+        ///<summary>
+        ///aby zwracac singleton danej klasy, przechowujemy go w prywatnej zmiennej statycznej -> dostep przez funkcje GetSingleton<see cref="PrimeNumbersGenerator.GetSingleton"/>
+        ///</summary>
         static private PrimeNumbersGenerator singletonPrimeNumbersGenerator;
 
         /// <summary>
@@ -100,48 +114,64 @@ namespace SpiralaUlamaLibrary
             if (maximumValue < primeNumbers.Last())
                 return this;
 
-            int MaximumSizeOfSieve = Math.Max(210, (int)Math.Sqrt(maximumValue));
+            //Maxymalny rozmiar sita Erastostesa:
+            //2*3*5*7*11*13*17*19 = 9699690
+            int MaximumSizeOfSieve = 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19;
+            //poczatkowo tylko 2, pozniej mnozymy przez kolejne liczby, az uzyskamy wczesniej zadeklarowane 9699690
             int sizeOfSieve = 2;
             int indexOfMaximumPrimeInSieve = 0;
             while (indexOfMaximumPrimeInSieve + 1 < primeNumbers.Count && sizeOfSieve * (int)primeNumbers[indexOfMaximumPrimeInSieve + 1] <= MaximumSizeOfSieve)
                 sizeOfSieve *= (int)primeNumbers[++indexOfMaximumPrimeInSieve];
 
+            //inicjacja sita
             bool[] sieve = new bool[sizeOfSieve + 1];
             for (int i = 0; i < sieve.Length; i++)
                 sieve[i] = true;
             sieve[0] = false;
 
+            //zapeln sito
             for (int i = 0; i <= indexOfMaximumPrimeInSieve; i++)
                 for (int j=(int)primeNumbers[i], c = j; j < sieve.Length; j += c)
                     sieve[j] = false;
 
+            //sprawdz ile bedzie kandydatow z sita
             int howManyCadidatsInSieve = 0;
             for (int i = 0; i < sieve.Length; i++)
                 if (sieve[i])
                     howManyCadidatsInSieve++;
 
+            //zapisz kandydatow z sita do osobnej tablicy: candidatsFromSieve
             int[] candidatsFromSieve = new int[howManyCadidatsInSieve];
             for (int i = 0, actualCandidat = 0; i < sieve.Length; i++)
                 if (sieve[i])
                     candidatsFromSieve[actualCandidat++] = (int)i;
 
 
+            //wyszukuj liczby do maximumValue
             for (int i = 0, sizeOfSieveUL = (int)sizeOfSieve; i <= maximumValue; i += sizeOfSieveUL)
-                for (int j = 0; j < candidatsFromSieve.Length; j++)
-                {
-                    int actualCandidateForPrime = i + candidatsFromSieve[j];
-                    if (actualCandidateForPrime <= primeNumbers.Last())
-                        continue;
-                    int actualCandidateForPrimeSqrt = (int)Math.Sqrt(actualCandidateForPrime);
+                //wykonuj tylko, jesli kandydaci sa wieksi od maxymalnej juz wyliczonej liczby pierwszej
+                if(i+ sizeOfSieveUL> primeNumbers.Last())
+                    //dla kazdego kandydata z sita -> sprawdz czy liczba wygenerowana jest liczba pierwsza
+                    for (int j = 0; j < candidatsFromSieve.Length; j++)
+                    {
+                        //aktualna liczba, która może być liczbą pierwszą
+                        int actualCandidateForPrime = i + candidatsFromSieve[j];
+                        //jesli juz wczesniej mielismy wyliczone liczby pierwsze do tej wartosci, to nie sprawdzaj
+                        if (actualCandidateForPrime <= primeNumbers.Last())
+                            continue;
 
-                    int range = 0;
-                    while (actualCandidateForPrimeSqrt >= primeNumbers[range] && actualCandidateForPrime % primeNumbers[range] != 0)
-                        range++;
+                        //bedziemy sprawdzac czy jest liczba pierwsza, tylko liczby pierwsze do pierwiastka z aktualnego kandydata
+                        int actualCandidateForPrimeSqrt = (int)Math.Sqrt(actualCandidateForPrime);
 
-                    if (actualCandidateForPrime % primeNumbers[range] != 0)
-                        primeNumbers.Add(actualCandidateForPrime);
+                        int range = 0;
+                        while (actualCandidateForPrimeSqrt >= primeNumbers[range] && actualCandidateForPrime % primeNumbers[range] != 0)
+                            range++;
 
-                }
+                        //jesli reszta z dzielenia jest != 0, to jest to liczba pierwsza
+                        if (actualCandidateForPrime % primeNumbers[range] != 0)
+                            primeNumbers.Add(actualCandidateForPrime);
+
+                    }
             return this;
         }
     }
