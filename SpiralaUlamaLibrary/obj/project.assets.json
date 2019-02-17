@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Komputer\\source\\repos\\SpiralaUlama\\SpiralaUlamaLibrary\\SpiralaUlamaLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\Komputer\\Source\\Repos\\ishyrion\\SpiralaUlama\\SpiralaUlamaLibrary\\SpiralaUlamaLibrary.csproj",
       "projectName": "SpiralaUlamaLibrary",
-      "projectPath": "C:\\Users\\Komputer\\source\\repos\\SpiralaUlama\\SpiralaUlamaLibrary\\SpiralaUlamaLibrary.csproj",
+      "projectPath": "C:\\Users\\Komputer\\Source\\Repos\\ishyrion\\SpiralaUlama\\SpiralaUlamaLibrary\\SpiralaUlamaLibrary.csproj",
       "packagesPath": "C:\\Users\\Komputer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Komputer\\source\\repos\\SpiralaUlama\\SpiralaUlamaLibrary\\obj\\",
+      "outputPath": "C:\\Users\\Komputer\\Source\\Repos\\ishyrion\\SpiralaUlama\\SpiralaUlamaLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
